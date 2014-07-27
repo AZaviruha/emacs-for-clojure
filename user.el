@@ -52,6 +52,9 @@
 (require 'evil)
 (evil-mode 1)
 
+; ========== Markup ============== ;
+(add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
+(add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
 
 ; ========== JavaScript ========== ;
 (add-hook 'js-mode-hook 'js2-minor-mode)
