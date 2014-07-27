@@ -12,15 +12,6 @@
 
 ;; Place downloaded elisp files in this directory. You'll then be able
 ;; to load them.
-;;
-;; For example, if you download yaml-mode.el to ~/.emacs.d/vendor,
-;; then you can add the following code to this file:
-;;
-;; (require 'yaml-mode)
-;; (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
-;; 
-;; Adding this code will make Emacs enter yaml mode whenever you open
-;; a .yml file
 (add-to-list 'load-path "~/.emacs.d/vendor")
 
 ;; shell scripts
@@ -48,15 +39,33 @@
 ;; Save here instead of littering current directory with emacs backup files
 (setq backup-directory-alist `(("." . "~/.saves")))
 
-;(add-to-list 'load-path "~/.emacs.d/elpa/evil-20140625.411")
+(require 'pomodoro) 
+(pomodoro-add-to-mode-line)
+
+
+; ============================================================================= ;
+; ================================= EMACS AS IDE ============================== ;
+; ============================================================================= ;
+
+; ================================ ;
+; ========== VIM ================= ;
+; ================================ ;
 (require 'evil)
 (evil-mode 1)
 
+; NerdTree
+;(require 'dirtree)
+(require 'neotree)
+
+; ================================ ;
 ; ========== Markup ============== ;
+; ================================ ;
 (add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
 (add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
 
+; ================================ ;
 ; ========== JavaScript ========== ;
+; ================================ ;
 (add-hook 'js-mode-hook 'js2-minor-mode)
 (add-hook 'js2-mode-hook 'ac-js2-mode)
 
