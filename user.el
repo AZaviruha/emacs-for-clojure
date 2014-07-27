@@ -48,5 +48,16 @@
 ;; Save here instead of littering current directory with emacs backup files
 (setq backup-directory-alist `(("." . "~/.saves")))
 
+;(add-to-list 'load-path "~/.emacs.d/elpa/evil-20140625.411")
 (require 'evil)
 (evil-mode 1)
+
+
+; ========== JavaScript ========== ;
+(add-hook 'js-mode-hook 'js2-minor-mode)
+(add-hook 'js2-mode-hook 'ac-js2-mode)
+
+
+(require 'flycheck)
+(add-hook 'js-mode-hook (lambda () (flycheck-mode t)))
+
