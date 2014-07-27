@@ -6,11 +6,8 @@
     (setenv "PATH" path-from-shell)
     (setq exec-path (split-string path-from-shell path-separator))))
 
-;; Uncomment the lines below by removing semicolons and play with the
-;; values in order to set the width (in characters wide) and height
-;; (in lines high) Emacs will have whenever you start it
 
-;; (setq initial-frame-alist '((top . 0) (left . 0) (width . 20) (height . 20)))
+(setq initial-frame-alist '((top . 0) (left . 0) (width . 160) (height . 40)))
 
 
 ;; Place downloaded elisp files in this directory. You'll then be able
@@ -31,11 +28,11 @@
 (setq-default sh-indentation 2)
 
 ;; Themes
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-(add-to-list 'load-path "~/.emacs.d/themes")
+;(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+;(add-to-list 'load-path "~/.emacs.d/themes")
 ;; Uncomment this to increase font size
 ;; (set-face-attribute 'default nil :height 140)
-(load-theme 'tomorrow-night-bright t)
+;(load-theme 'tomorrow-night-bright t)
 
 ;; Flyspell often slows down editing so it's turned off
 (remove-hook 'text-mode-hook 'turn-on-flyspell)
@@ -50,3 +47,6 @@
 
 ;; Save here instead of littering current directory with emacs backup files
 (setq backup-directory-alist `(("." . "~/.saves")))
+
+(require 'evil)
+(evil-mode 1)
