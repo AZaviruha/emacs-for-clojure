@@ -7,7 +7,7 @@
     (setq exec-path (split-string path-from-shell path-separator))))
 
 
-(setq initial-frame-alist '((top . 0) (left . 0) (width . 160) (height . 40)))
+;(setq initial-frame-alist '((top . 0) (left . 0) (width . 160) (height . 40)))
 
 
 ;; Place downloaded elisp files in this directory. You'll then be able
@@ -57,7 +57,20 @@
 (add-hook 'js-mode-hook 'js2-minor-mode)
 (add-hook 'js2-mode-hook 'ac-js2-mode)
 
-
+; JSHint
 (require 'flycheck)
 (add-hook 'js-mode-hook (lambda () (flycheck-mode t)))
 
+; Tern
+(add-hook 'js-mode-hook (lambda () (tern-mode t)))
+(eval-after-load 'tern
+   '(progn
+      (require 'tern-auto-complete)
+      (tern-ac-setup)))
+
+
+; Auto-complete mode
+;;; should be loaded after yasnippet so that they can work together
+(require 'auto-complete-config)
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
+(ac-config-default)
