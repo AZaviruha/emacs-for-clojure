@@ -1,0 +1,9 @@
+;;; emms history -*- mode: emacs-lisp; coding: utf-8; -*-
+(
+;; active playlist
+" *EMMS Playlist*"
+;; playlists: ((BUFFER_NAME SELECT_POSITION TRACKS) ...)
+((" *EMMS Playlist*" 1 ((*track* (type . streamlist) (name . "http://somafm.com/cliqhop.pls") (metadata)))))
+;; play method
+((emms-repeat-track) (emms-repeat-playlist))
+)
