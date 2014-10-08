@@ -73,6 +73,14 @@
 ; ================================ ;
 ; ========== VIM ================= ;
 ; ================================ ;
+;; (global-set-key "\C-w" 'clipboard-kill-region)
+;; (global-set-key "\M-w" 'clipboard-kill-ring-save)
+;; (global-set-key "\C-y" 'clipboard-yank)
+
+(global-set-key [(shift delete)] 'clipboard-kill-region)
+(global-set-key [(control insert)] 'clipboard-kill-ring-save)
+(global-set-key [(shift insert)] 'clipboard-yank)
+
 ; NerdCommenter
 (require 'evil-nerd-commenter)
 (evilnc-default-hotkeys)
@@ -100,6 +108,14 @@
 (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.jsx\\'" . web-mode))
+
+(defun my-web-mode-hook ()
+  "Hooks for Web mode."
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-code-indent-offset 4) )
+
+(add-hook 'web-mode-hook 'my-web-mode-hook)
 
 
 ; Emmet

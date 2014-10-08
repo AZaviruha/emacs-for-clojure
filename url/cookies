@@ -2,7 +2,9 @@
 ;; Automatically generated file!!! DO NOT EDIT!!!
 
 (setq url-cookie-storage
- 'nil)
+ '(("localhost"
+  [url-cookie "anonymousUserId" "a36aee6e-c171-4cba-ab21-29a4d2d7083c" "14-Aug-2015 14:40:32.00 GMT" "/portalserver" "localhost" nil]))
+)
 (setq url-cookie-secure-storage
  'nil)
 
