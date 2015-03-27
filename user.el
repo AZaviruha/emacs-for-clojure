@@ -70,6 +70,8 @@
 ; ================================= EMACS AS IDE ============================== ;
 ; ============================================================================= ;
 
+(global-linum-mode 1)
+
 ; ================================ ;
 ; ========== VIM ================= ;
 ; ================================ ;
@@ -108,7 +110,6 @@
 (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.jsx\\'" . web-mode))
 
 (defun my-web-mode-hook ()
   "Hooks for Web mode."
@@ -127,6 +128,7 @@
 ; ================================ ;
 (add-hook 'js-mode-hook 'js2-minor-mode)
 (add-hook 'js2-mode-hook 'ac-js2-mode)
+(add-to-list 'auto-mode-alist '("\\.jsx\\'" . js2-mode))
 
 ; JSHint
 (require 'flycheck)
@@ -152,6 +154,15 @@
 (setq inferior-js-program-command "node --interactive")
 
 
+;; Line up
+(defun align-to-equals (begin end)
+  "Align region to equal signs"
+   (interactive "r")
+   (align-regexp begin end "\\(\\s-*\\)=" 1 1 ))
+
+(global-set-key "\C-c\C-b" 'align-to-equals)
+
+
 ; ================================ ;
 ; ========== Haskell ============= ;
 ; ================================ ;
@@ -172,3 +183,19 @@
 (define-key haskell-mode-map (kbd "C-c c") 'haskell-process-cabal)
 (define-key haskell-mode-map (kbd "SPC") 'haskell-mode-contextual-space)
 
+
+; ================================ ;
+; ========== Gherkin ============= ;
+; ================================ ;
+(require 'feature-mode)
+(add-to-list 'auto-mode-alist '("\\.feature\\'" . feature-mode))
+
+
+; ================================ ;
+; ========== Clojure ============= ;
+; ================================ ;
+;; (require 'clj-refactor)
+;; (add-hook 'clojure-mode-hook (lambda ()
+;;                                (clj-refactor-mode 1)
+;;                                ;; insert keybinding setup here
+;;                                ))
