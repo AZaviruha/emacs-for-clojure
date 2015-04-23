@@ -71,6 +71,8 @@
 ; ============================================================================= ;
 
 (global-linum-mode 1)
+(add-hook 'after-init-hook #'global-flycheck-mode)
+
 
 ; ================================ ;
 ; ========== VIM ================= ;
@@ -142,6 +144,30 @@
       (tern-ac-setup)))
 
 
+;;-------------- flycheck-jscs ---------------------
+(add-hook 'js2-mode-hook
+          (lambda ()
+            (tern-mode t)
+            (setq flycheck-check-syntax-automatically '(save mode-enabled))))
+
+(flycheck-def-config-file-var flycheck-jscs javascript-jscs ".jscs.json"
+  :safe #'stringp)
+
+(flycheck-define-checker javascript-jscs
+  "A JavaScript code style checker.
+See URL `https://github.com/mdevils/node-jscs'."
+  :command ("jscs" "--reporter" "checkstyle"
+            "--preset=airbnb"
+            ;;(config-file "--config" flycheck-jscs)
+            source)
+  :error-parser flycheck-parse-checkstyle
+  :modes (js-mode js2-mode js3-mode)
+  :next-checkers (javascript-jshint))
+
+(add-to-list 'flycheck-checkers 'javascript-jscs)
+;;-------------- flycheck-jscs ---------------------
+
+
 ; Auto-complete mode
 ;;; should be loaded after yasnippet so that they can work together
 (require 'auto-complete-config)
@@ -161,6 +187,14 @@
    (align-regexp begin end "\\(\\s-*\\)=" 1 1 ))
 
 (global-set-key "\C-c\C-b" 'align-to-equals)
+
+(defun align-to-colon (begin end)
+  "Align region to equal signs"
+   (interactive "r")
+   (align-regexp begin end "\\(\\s-*\\)\\:" 1 1 )
+   (align-regexp begin end "\\:\\(\\s-*\\)" 1 1 ))
+
+(global-set-key "\C-c\C-v" 'align-to-colon)
 
 
 ; ================================ ;
@@ -199,3 +233,10 @@
 ;;                                (clj-refactor-mode 1)
 ;;                                ;; insert keybinding setup here
 ;;                                ))
+;(add-hook 'cider-mode-hook #'eldoc-mode)
+;; (define-key cider-mode-map (kbd "M-.") 'cider-jump)
+(define-key evil-insert-state-map (kbd "M-.") 'cider-jump)
+(define-key evil-motion-state-map (kbd "M-.") 'cider-jump)
+(define-key evil-normal-state-map (kbd "M-.") 'cider-jump)
+;; (define-key cider-mode-map (kbd "C-c M-.") 'cider-jump-to-resource)
+
